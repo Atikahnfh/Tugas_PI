@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateJurusanRequest extends FormRequest
+class StoreJurusanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class UpdateJurusanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'namaJurusan'=> ['required'],           
         ];
+
+        
+    }
+    protected function prepareForValidation() {
+            $this->merge([
+                'nama_jurusan' => $this->namaJurusan,
+            ]);
     }
 }

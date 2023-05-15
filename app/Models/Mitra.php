@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Mitra extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'nama_mitra',   
+    ];  
+    public $timestamps = false;
 }

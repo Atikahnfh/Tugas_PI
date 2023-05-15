@@ -32,7 +32,12 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], f
     // Route::post('beasiswas/bulk', ['uses'=> 'BeasiswaController@bulkStore']);
     Route::get('beasiswas', ['uses' =>'BeasiswaController@index']);
     Route::get('beasiswas/{beasiswa}', ['uses' =>'BeasiswaController@show']);
+    
+    Route::get('jurusans', 'JurusanController@index');
+    Route::get('jurusans/{jurusan}', ['uses'=>'JurusanController@show']);
 
+    Route::get('mitras', 'MitraController@index');
+    Route::get('mitras/{mitra}', ['uses'=>'MitraController@show']);
 
     Route::apiResource('mitras', MitraController::class);
     Route::apiResource('jrsnbeasiswas', JurusanbeasiswaController::class);//yang ini routenya pakai "s" yang di controller parameternya sama tapi ga pakai "s"
@@ -41,6 +46,8 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], f
     Route::apiResource('jurusans', JurusanController::class);
     Route::apiResource('kliens', KlienController::class);
     Route::apiResource('levelkliens', LevelKlienController::class);
+
+    
 });
 
 
@@ -62,6 +69,14 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::post('beasiswas/bulk', ['uses'=> 'BeasiswaController@bulkStore']);
         Route::put('beasiswas/{beasiswa}', ['uses' =>'BeasiswaController@update']);
         Route::patch('beasiswas/{beasiswa}', ['uses' =>'BeasiswaController@update']);
+
+        Route::post('jurusans', 'JurusanController@store');
+        Route::put('jurusans/{jurusan}', 'JurusanController@update');
+        Route::delete('jurusans/{jurusan}', 'JurusanController@delete');
+
+        Route::post('mitras', 'MitraController@store');
+        Route::put('mitras/{jurusan}', 'MitraController@update');
+        Route::delete('mitras/{jurusan}', 'MitraController@delete');
 
     });
 });
