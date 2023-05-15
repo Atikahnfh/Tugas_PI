@@ -46,8 +46,8 @@ return [
     |
     */
 
-    'expiration' => null,
-
+    'expiration' => 43800,
+    //ini untuk expire token
     /*
     |--------------------------------------------------------------------------
     | Sanctum Middleware

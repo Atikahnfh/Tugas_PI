@@ -57,7 +57,13 @@ class BeasiswaController extends Controller
             return Arr::except($arr, ['namaBeasiswa','idMitra','angkatanAwal','angkatanAkhir','semMin','semMax']);
         });
 
-        Beasiswa::insert($bulk->toArray());
+        if(Beasiswa::insert($bulk->toArray())){
+            return response()->json("Beasiswa berhasil dimasukkan!");
+        }else{
+            return response()->json("Beasiswa gagal dimasukkan");
+        }
+
+
     }
 
 
