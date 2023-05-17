@@ -36,6 +36,9 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], f
     Route::get('jurusans', 'JurusanController@index');
     Route::get('jurusans/{jurusan}', ['uses'=>'JurusanController@show']);
 
+    Route::get('jrsnbeasiswas', 'JurusanbeasiswaController@index');
+    Route::get('jrsnbeasiswas/{jurusanbeasiswa}', ['uses'=>'JurusanbeasiswaController@show']);
+
     Route::get('mitras', 'MitraController@index');
     Route::get('mitras/{mitra}', ['uses'=>'MitraController@show']);
 
@@ -74,6 +77,11 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::put('jurusans/{jurusan}', 'JurusanController@update');
         Route::delete('jurusans/{jurusan}', 'JurusanController@delete');
         Route::post('jurusans/bulk', ['uses'=> 'JurusanController@bulkStore']);
+
+        Route::post('jrsnbeasiswas', 'JurusanbeasiswaController@store');
+        Route::post('jrsnbeasiswas/bulk', ['uses'=> 'JurusanbeasiswaController@bulkStore']);
+        Route::put('jrsnbeasiswas/{jurusanbeasiswa}', 'JurusanbeasiswaController@update');
+        Route::patch('jrsnbeasiswas/{jurusanbeasiswa}', 'JurusanbeasiswaController@update');
 
 
         Route::post('mitras', 'MitraController@store');
