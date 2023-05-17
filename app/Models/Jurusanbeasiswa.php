@@ -8,8 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Jurusanbeasiswa extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'beasiswa_id',
+        'id_beasiswakhsjrsn',
+        'ipk_min',
 
-    public function Beasiswas() {
+    ];
+    public $timestamps = false;
+
+    public function Jurusanbeasiswas() {
         return $this->belongsTo(Beasiswa::class);
     }
 }
