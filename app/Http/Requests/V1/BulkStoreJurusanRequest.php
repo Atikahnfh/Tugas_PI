@@ -5,7 +5,7 @@ namespace App\Http\Requests\V1;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class BulkStoreBeasiswaRequest extends FormRequest
+class BulkStoreJurusanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,14 +29,6 @@ class BulkStoreBeasiswaRequest extends FormRequest
         
     }
     protected function prepareForValidation() {
-        // $this->merge([
-        //     'nama_beasiswa' => $this->namaBeasiswa,
-        //     'id_mitra' => $this->idMitra,
-        //     'angkatan_awal' => $this->angkatanAwal,
-        //     'angkatan_akhir' => $this->angkatanAkhir,
-        //     'sem_min'=>$this->semMin,
-        //     'sem_max'=>$this->semMax
-        // ]);
 
         $data = [];
 

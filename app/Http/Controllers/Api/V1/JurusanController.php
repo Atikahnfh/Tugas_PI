@@ -8,6 +8,10 @@ use App\Http\Requests\V1\StoreJurusanRequest;
 use App\Http\Requests\V1\UpdateJurusanRequest;
 use App\Http\Resources\V1\JurusanCollection;
 use App\Http\Resources\V1\JurusanResource;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use App\Http\Requests\V1\BulkStoreJurusanRequest;
+
 
 class JurusanController extends Controller
 {

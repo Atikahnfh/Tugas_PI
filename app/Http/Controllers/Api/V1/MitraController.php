@@ -8,6 +8,9 @@ use App\Http\Requests\V1\StoreMitraRequest;
 use App\Http\Requests\V1\UpdateMitraRequest;
 use App\Http\Resources\V1\MitraResource;
 use App\Http\Resources\V1\MitraCollection;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use App\Http\Requests\V1\BulkStoreMitraRequest;
 
 class MitraController extends Controller
 {
@@ -38,7 +41,7 @@ class MitraController extends Controller
     public function bulkStore(BulkStoreMitraRequest $request)
     {
         $bulk = collect($request->all())->map(function($arr, $key) {
-            return Arr::except($arr, ['namaMitra','idMitra','angkatanAwal','angkatanAkhir','semMin','semMax']);
+            return Arr::except($arr, ['namaMitra']);
         });
 
         if(Mitra::insert($bulk->toArray())){

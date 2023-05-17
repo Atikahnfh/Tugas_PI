@@ -73,10 +73,14 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::post('jurusans', 'JurusanController@store');
         Route::put('jurusans/{jurusan}', 'JurusanController@update');
         Route::delete('jurusans/{jurusan}', 'JurusanController@delete');
+        Route::post('jurusans/bulk', ['uses'=> 'JurusanController@bulkStore']);
+
 
         Route::post('mitras', 'MitraController@store');
         Route::put('mitras/{jurusan}', 'MitraController@update');
         Route::delete('mitras/{jurusan}', 'MitraController@delete');
+        Route::post('mitras/bulk', ['uses'=> 'MitraController@bulkStore']);
+
 
     });
 });
