@@ -11,7 +11,7 @@ class Beasiswa extends Model
 
     protected $fillable = [
         'nama_beasiswa',
-        'id_mitra',
+        'mitra_id',
         'deskripsi',
         'angkatan_awal',
         'angkatan_akhir',
@@ -22,6 +22,13 @@ class Beasiswa extends Model
     public $timestamps = false;
     public function jurusanbeasiswas() {
         return $this->hasMany(Jurusanbeasiswa::class);
+    }
+
+    public function mitras() {
+        return $this->belongsTo(Mitra::class);
+    }
+    public function statusbeasiswas() {
+        return $this->belongsTo(Statusbeasiswa::class);
     }
 
 }

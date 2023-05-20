@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Userlevel extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'level_id'
+    ];
+    public $timestamps = false;
 }

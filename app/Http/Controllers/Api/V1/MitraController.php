@@ -3,23 +3,38 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Mitra;
+use App\Models\Beasiswa;
+use App\Models\JurusanBeasiswa;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\StoreMitraRequest;
+use App\Http\Requests\V1\BulkStoreMitraRequest;
 use App\Http\Requests\V1\UpdateMitraRequest;
 use App\Http\Resources\V1\MitraResource;
 use App\Http\Resources\V1\MitraCollection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use App\Http\Requests\V1\BulkStoreMitraRequest;
+use App\Filters\V1\MitraFilter;
 
 class MitraController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new MitraCollection(Mitra::all());
+        $filter = new MitraFilter();
+        $queryitem = $filter->transform($request);
+
+        $includebeasiswas = $request->query('includeBeasiswas');
+        $mitrass = Mitra::where($queryitem);
+        
+        
+        if($includebeasiswas){
+            $mitrass = $mitrass->with('beasiswas');
+        }
+
+        
+        return new MitraCollection($mitrass->paginate()->appends($request->query()));
     }
 
     /**
@@ -41,7 +56,7 @@ class MitraController extends Controller
     public function bulkStore(BulkStoreMitraRequest $request)
     {
         $bulk = collect($request->all())->map(function($arr, $key) {
-            return Arr::except($arr, ['namaMitra']);
+            return Arr::except($arr, ['namaMitra','idMitra','angkatanAwal','angkatanAkhir','semMin','semMax']);
         });
 
         if(Mitra::insert($bulk->toArray())){
@@ -75,15 +90,33 @@ class MitraController extends Controller
     {
         $mitra->update($request->all());
 
-        return $mitra;    }
+        return $mitra;
+    }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Mitra $mitra)
     {
-        $jurusan->delete();
+        //hapus mitra artinya hapus beasiswa, hapus beasiswa artinya hapus jurusan beasiswa
+        //get dulu id beasiswanya
 
-        return 204;
+        $getidbeasiswa = Beasiswa::where('mitra_id', $mitra->id)->get('id');
+        //hapus jurusan beasiswas
+        foreach($getidbeasiswa as $idbeasiswa){
+            //pertama tama delete yang ada di jurusan beasiswas
+            $deljrsnbeasiswa = JurusanBeasiswa::where('beasiswa_id',$idbeasiswa->id)->delete();
+            //baru yang beasiswa
+            $delbeasiswa = Beasiswa::where('id',$idbeasiswa->id)->delete();
+            if(!$delbeasiswa){
+                return response()->json("ada Beasiswa dengan mitra tersebut yang gagal didelete");
+            }
+        }
+        $delmitra = Mitra::where('id',$mitra->id)->delete();
+        if($delmitra){
+            return response()->json("Mitra berhasil didelete!");
+        }else{
+            return response()->json("Mitra gagal didelete");
+        }
     }
 }

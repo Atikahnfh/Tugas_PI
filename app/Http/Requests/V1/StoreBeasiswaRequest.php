@@ -12,7 +12,9 @@ class StoreBeasiswaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $user = $this->user( );
+
+        return $user != null && ($user->tokenCan('*'));
     }
 
     /**
@@ -24,7 +26,7 @@ class StoreBeasiswaRequest extends FormRequest
     {
         return [
             'namaBeasiswa'=> ['required'],
-            'idMitra'=> ['required'],
+            'mitraId'=> ['required'],
             'deskripsi'=> ['required'],
             'angkatanAwal'=> ['required'],
             'angkatanAkhir'=> ['required'],
@@ -38,7 +40,7 @@ class StoreBeasiswaRequest extends FormRequest
     protected function prepareForValidation() {
             $this->merge([
                 'nama_beasiswa' => $this->namaBeasiswa,
-                'id_mitra' => $this->idMitra,
+                'mitra_id' => $this->mitraId,
                 'angkatan_awal' => $this->angkatanAwal,
                 'angkatan_akhir' => $this->angkatanAkhir,
                 'sem_min'=>$this->semMin,

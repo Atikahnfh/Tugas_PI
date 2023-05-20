@@ -12,4 +12,8 @@ class Mitra extends Model
         'nama_mitra',   
     ];  
     public $timestamps = false;
+
+    public function beasiswas() {
+        return $this->hasMany(Beasiswa::class);
+    }
 }

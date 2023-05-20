@@ -3,15 +3,12 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Jurusan;
+use App\Models\Jurusanbeasiswa;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\StoreJurusanRequest;
 use App\Http\Requests\V1\UpdateJurusanRequest;
 use App\Http\Resources\V1\JurusanCollection;
 use App\Http\Resources\V1\JurusanResource;
-use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-use App\Http\Requests\V1\BulkStoreJurusanRequest;
-
 
 class JurusanController extends Controller
 {
@@ -89,9 +86,15 @@ class JurusanController extends Controller
      */
     public function destroy(Jurusan $jurusan)
     {
-        // $jurusan = Jurusan::findOrFail($id);
-        $jurusan->delete();
+        //hapus jurusan hapus dulu jrsnbeasiswa
+        $deljrsnbeasiswa = JurusanBeasiswa::where('id_beasiswakhsjrsn',$jurusan->id)->delete();
+        //baru delete jurusan
+        $deljurusan = Jurusan::where('id', $jurusan->id)->delete();
+        if(!$deljurusan){
+            return response()->json("Jurusan gagal didelete");
+        }
+        return response()->json("Jurusan berhasil didelete");
 
-        return 204;
+
     }
 }

@@ -12,7 +12,9 @@ class UpdateBeasiswaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $user = $this->user( );
+
+        return $user != null && $user->tokenCan('*');
     }
 
     /**
@@ -27,7 +29,7 @@ class UpdateBeasiswaRequest extends FormRequest
         if($method == 'PUT') {
             return [
                 'namaBeasiswa'=> ['required'],
-                'idMitra'=> ['required'],
+                'mitraId'=> ['required'],
                 'deskripsi'=> ['required'],
                 'angkatanAwal'=> ['required'],
                 'angkatanAkhir'=> ['required'],
@@ -38,7 +40,7 @@ class UpdateBeasiswaRequest extends FormRequest
         }else{
             return [
                 'namaBeasiswa'=> ['sometimes','required'],
-                'idMitra'=> ['sometimes','required'],
+                'mitraId'=> ['sometimes','required'],
                 'deskripsi'=> ['sometimes','required'],
                 'angkatanAwal'=> ['sometimes','required'],
                 'angkatanAkhir'=> ['sometimes','required'],
@@ -55,8 +57,8 @@ class UpdateBeasiswaRequest extends FormRequest
         if($this->namaBeasiswa){
             $this->merge(['nama_beasiswa' => $this->namaBeasiswa,]);
         }
-        if($this->idMitra){
-            $this->merge(['id_mitra' => $this->idMitra,]);
+        if($this->mitraId){
+            $this->merge(['mitra_id' => $this->mitraId]);
         }
         if($this->angkatanAwal){
             $this->merge(['angkatan_awal' => $this->angkatanAwal,]);
@@ -70,7 +72,6 @@ class UpdateBeasiswaRequest extends FormRequest
         if($this->semMax){
             $this->merge(['sem_max'=>$this->semMax]);
         }
-
 
         // $this->merge([
         //     'nama_beasiswa' => $this->namaBeasiswa,

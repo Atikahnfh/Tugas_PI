@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Beasiswa;
+use App\Models\JurusanBeasiswa;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\StoreBeasiswaRequest;
 use App\Http\Requests\V1\UpdateBeasiswaRequest;
@@ -72,11 +73,15 @@ class BeasiswaController extends Controller
      */
     public function show(Beasiswa $beasiswa)
     {
+        
+        
         $includejrsnbeasiswas = request()->query('includeJurusans');
+        $beas = Beasiswa::where('beasiswas.id',$beasiswa->id);
+
         if($includejrsnbeasiswas){
-            return new BeasiswaResource($beasiswa->loadMissing('jurusanbeasiswas'));
+           $beas = $beas->with('jurusanbeasiswas');
         }
-        return new BeasiswaResource($beasiswa);
+        return new BeasiswaResource($beas->first());
     }
 
     /**
@@ -100,6 +105,16 @@ class BeasiswaController extends Controller
      */
     public function destroy(Beasiswa $beasiswa)
     {
-        //
+        //pertama tama delete yang ada di jurusan beasiswas
+        $deljrsnbeasiswa = JurusanBeasiswa::where('beasiswa_id',$beasiswa->id)->delete();
+        //baru yang beasiswa
+        $delbeasiswa = Beasiswa::where('id',$beasiswa->id)->delete();
+        if($delbeasiswa){
+            return response()->json("Beasiswa berhasil didelete!");
+        }else{
+            return response()->json("Beasiswa gagal didelete");
+        }
+
+
     }
 }

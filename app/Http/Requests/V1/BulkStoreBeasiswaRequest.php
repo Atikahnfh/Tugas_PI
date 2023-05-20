@@ -12,7 +12,9 @@ class BulkStoreBeasiswaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $user = $this->user( );
+
+        return $user != null && $user->tokenCan('*');
     }
 
     /**
@@ -49,7 +51,7 @@ class BulkStoreBeasiswaRequest extends FormRequest
 
         foreach($this->toArray() as $obj) {
             $obj['nama_beasiswa'] = $obj['namaBeasiswa'] ?? null;
-            $obj['id_mitra'] = $obj['idMitra'] ?? null;
+            $obj['mitra_id'] = $obj['idMitra'] ?? null;
             $obj['angkatan_awal'] = $obj['angkatanAwal'] ?? null;
             $obj['angkatan_akhir'] = $obj['angkatanAkhir'] ?? null;
             $obj['sem_min'] = $obj['semMin'] ?? null;

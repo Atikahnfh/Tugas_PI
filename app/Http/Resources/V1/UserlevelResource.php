@@ -5,7 +5,7 @@ namespace App\Http\Resources\V1;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MitraResource extends JsonResource
+class UserlevelResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,13 +14,10 @@ class MitraResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        
-        
         return [
-            'idMitra' => $this->id,
-            'namaMitra' => $this->nama_mitra,
-
-            'beasiswas' => BeasiswaResource::collection($this->whenLoaded('beasiswas'))
+            'iduserLevel' => $this->id,
+            'idUser' => $this->user_id,
+            'idLevel' => $this->level_id
         ];
     }
 }
