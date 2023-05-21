@@ -3,7 +3,7 @@
 ## 👋🏻 Introduction
 Selamat datang di Repository API Mahasiswa. API Mahasiswa ini dibangun menggunakan Framework Laravel v10.x dan TailwindCSS v3.3.2
 
-## 🚀 Getting started with this workspace
+## 🚀 Getting started with this API
 Koleksi ini berisi dokumentasi menyeluruh dari API Mahasiswa. Mereka akan membantu Anda memahami kemampuan layanan yang kami miliki dan cara menggunakannya secara efektif.
 
 ### Authentication
