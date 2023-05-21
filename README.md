@@ -14,31 +14,53 @@ pada proses autentikasi kami menyediakan tiga request
 http://localhost:8000/api/login
 ```
    #### Request Headers
-   ###### Accept dan Content-Type
-   ``` value
-   application/vnd.api+json
-   ```
-   #### Body
-   ###### form-data
-   ```
-   email: example@gmail.com
-   password: Test1234!
-   ```
+   `Accept:` application/vnd.api+json  
+   `Content-Type:` application/vnd.api+json  
+   #### Body `form-data`
+   `email:` example@gmail.com
+   `password:` Test1234!
    
 - **POST** Register
 ``` url
 http://localhost:8000/api/register
 ```
    #### Request Headers
-   ###### Accept dan Content-Type
-   ``` value
-   application/vnd.api+json
-   ```
-   #### Body
-   ###### form-data
-   ```
-   name: Jhon Doe
-   email: example@gmail.com
-   password: Test1234!
-   password_confirmation: Test1234!
-   ```
+   `Accept:` application/vnd.api+json  
+   `Content-Type:` application/vnd.api+json  
+   #### Body `form-data`
+   `name:` Jhon Doe
+   `email:` example@gmail.com
+   `password:` Test1234!
+   `password_confirmation:` Test1234!
+   
+ - **POST** Logout
+``` url
+http://localhost:8000/api/logout
+```
+   #### Authorization `Bearer Token`
+   `Token:` {{ API_TOKEN }} 
+   #### Request Headers
+   `Accept:` application/vnd.api+json  
+   `Content-Type:` application/vnd.api+json 
+  
+
+### Mahasiswa
+- **GET** Semua Mahasiswa
+``` url
+http://localhost:8000/api/mahasiswa
+```
+   #### Authorization `Bearer Token`
+   `Token:` {{ API_TOKEN }} 
+   #### Request Headers
+   `Accept:` application/vnd.api+json  
+   `Content-Type:` application/vnd.api+json
+   
+- **GET** Satu Mahasiswa
+``` url
+http://localhost:8000/api/mahasiswa/{nim}
+```
+   #### Authorization `Bearer Token`
+   `Token:` {{ API_TOKEN }} 
+   #### Request Headers
+   `Accept:` application/vnd.api+json  
+   `Content-Type:` application/vnd.api+json
