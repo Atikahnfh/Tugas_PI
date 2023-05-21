@@ -7,7 +7,7 @@ Selamat datang di Repository API Mahasiswa. API Mahasiswa ini dibangun menggunak
 Koleksi ini berisi dokumentasi menyeluruh dari API Mahasiswa. Mereka akan membantu Anda memahami kemampuan layanan yang kami miliki dan cara menggunakannya secara efektif.
 
 ### Authentication
-pada proses autentikasi kami menyediakan tiga request
+Layanan Autentikasi terdiri dari 3 request
 
 - **POST** Login
 ``` url
