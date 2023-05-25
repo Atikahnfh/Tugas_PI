@@ -25,9 +25,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
+Route::resource('/mahasiswa', StudentController::class);
+
 // Protected Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::resource('/mahasiswa', StudentController::class);
     Route::resource('/tasks', TasksController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
 });

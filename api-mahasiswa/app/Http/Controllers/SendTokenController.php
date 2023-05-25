@@ -26,6 +26,7 @@ class SendTokenController extends Controller
             'name' => 'required|min:3|max:100',
             'purpose' => 'required|min:8'
         ]);
+        
 
         $user = User::create([
             'name' => $request->name,

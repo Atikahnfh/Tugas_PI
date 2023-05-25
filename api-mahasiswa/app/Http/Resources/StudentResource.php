@@ -18,6 +18,7 @@ class StudentResource extends JsonResource
     {
         $academic = Academic::where('id', '=', $this->id)->first();
         $status = Status::where('id', '=', $this->id)->first();
+
         return [
             'id' => (string)$this->id,
             'attributes' => [
@@ -27,9 +28,8 @@ class StudentResource extends JsonResource
                 'foto  ' => $this->photo ,
             ],
             'relationship' => [
-                'id' => (string)$academic->id,
                 'fakultas' => $academic->faculty,
-                'jurusan' => $academic->major,
+                'juruan' => $academic->major,
                 'jenjang' => $academic->level,
                 'ipk' => $academic->gpa,
                 'angkatan' => $status->batch,

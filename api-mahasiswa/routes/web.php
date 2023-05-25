@@ -1,6 +1,9 @@
 <?php
 
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SendTokenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [SendTokenController::class, 'index']);
+Route::post('/submit', [SendTokenController::class, 'viewData']);
+    
