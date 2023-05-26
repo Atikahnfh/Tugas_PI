@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Beasiswa;
+use App\Models\Mitra;
 use App\Models\JurusanBeasiswa;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\StoreBeasiswaRequest;
@@ -49,6 +50,16 @@ class BeasiswaController extends Controller
      */
     public function store(StoreBeasiswaRequest $request)
     {
+        //cek valid atau nggak
+        $cekmitra = Mitra::where('id','=',$request->mitra_id)->first();
+        if(!$cekmitra){
+            return response()->json('Tidak ada mitra dengan ID tersebut.');         
+        }
+        $cekstatus = Statusbeasiswa::where('id_status', '=', $request->status)->first();
+        if(!cekstatus){
+            return response()->json('Status beasiswa tidak valid...');
+        }
+        //klo berhasilkelaurkan response data yg dimasukkan
         return new BeasiswaResource(Beasiswa::create($request->all()));
     }
 
@@ -58,6 +69,19 @@ class BeasiswaController extends Controller
             return Arr::except($arr, ['namaBeasiswa','idMitra','angkatanAwal','angkatanAkhir','semMin','semMax']);
         });
 
+        //cek validitas
+        foreach($bulk as $key=>$value){
+            $cekmitra = Mitra::where('id','=',$value['mitra_id'])->first();
+            if(!$cekmitra){
+                return response()->json('Satu atau banyak data memiliki ID mitra yang tidak valid');         
+            }
+            $cekstatus = Statusbeasiswa::where('id_status', '=', $value['status'])->first();
+            if(!cekstatus){
+            return response()->json('Satu atau banyak data memiliki status yang tidak valid');
+            }
+        }
+
+        //klo valid semua
         if(Beasiswa::insert($bulk->toArray())){
             return response()->json("Beasiswa berhasil dimasukkan!");
         }else{
@@ -71,12 +95,17 @@ class BeasiswaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Beasiswa $beasiswa)
+    public function show($beasiswa)
     {
-        
-        
+        $beas = Beasiswa::where('beasiswas.id','=',$beasiswa);
+        //cek validasi
+        $cekbeasiswa = $beas->first();
+        if(!$cekbeasiswa){
+            return response()->json("Beasiswa tidak ditemukan!");
+        }
+        //end validasi
         $includejrsnbeasiswas = request()->query('includeJurusans');
-        $beas = Beasiswa::where('beasiswas.id',$beasiswa->id);
+        
 
         if($includejrsnbeasiswas){
            $beas = $beas->with('jurusanbeasiswas');
@@ -103,12 +132,21 @@ class BeasiswaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Beasiswa $beasiswa)
+    public function destroy($beasiswa)
     {
+        // $cekbeasiswa = Beasiswa::where('id',$beasiswa->id)->first();
+        $beas = Beasiswa::where('beasiswas.id','=',$beasiswa);
+        //cek validasi
+        $cekbeasiswa = $beas->first();//dipake pas untuk mendelete
+        if(!$cekbeasiswa){
+            return response()->json("Beasiswa tidak ditemukan!");
+        }
+        //end validasi
+        
         //pertama tama delete yang ada di jurusan beasiswas
-        $deljrsnbeasiswa = JurusanBeasiswa::where('beasiswa_id',$beasiswa->id)->delete();
+        $deljrsnbeasiswa = JurusanBeasiswa::where('beasiswa_id',$cekbeasiswa->id)->delete();
         //baru yang beasiswa
-        $delbeasiswa = Beasiswa::where('id',$beasiswa->id)->delete();
+        $delbeasiswa = $beas->delete();
         if($delbeasiswa){
             return response()->json("Beasiswa berhasil didelete!");
         }else{

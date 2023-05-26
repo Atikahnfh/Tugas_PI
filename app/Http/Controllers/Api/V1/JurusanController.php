@@ -54,9 +54,15 @@ class JurusanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Jurusan $jurusan)
+    public function show($jurusan)
     {
-        return new JurusanResource($jurusan);
+        $cekjurusan = Jurusan::where('id','=',$jurusan)->first();
+        if(!$cekjurusan){
+            return response()->json('Jurusan dengan ID tersebut tidak ada');
+        }
+        
+        
+        return new JurusanResource($cekjurusan);
     }
 
     /**
@@ -73,23 +79,32 @@ class JurusanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateJurusanRequest $request, Jurusan $jurusan)
+    public function update(UpdateJurusanRequest $request,$jurusan)
     {
-        // $jurusan = Jurusan::findOrFail($jurusan);
-        $jurusan->update($request->all());
+        //cek valid
+        $cekjurusan = Jurusan::where('id','=',$jurusan)->first();
+        if(!$cekjurusan){
+            return response()->json('Jurusan dengan ID tersebut tidak ada');
+        }
+        //klo valid maka
+        $cekjurusan->update($request->all());
 
-        return $jurusan;
+        return $cekjurusan;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Jurusan $jurusan)
+    public function destroy($jurusan)
     {
+        $cekjurusan = Jurusan::where('id','=',$jurusan)->first();
+        if(!$cekjurusan){
+            return response()->json('Jurusan dengan ID tersebut tidak ada');
+        }
         //hapus jurusan hapus dulu jrsnbeasiswa
-        $deljrsnbeasiswa = JurusanBeasiswa::where('id_beasiswakhsjrsn',$jurusan->id)->delete();
+        $deljrsnbeasiswa = JurusanBeasiswa::where('id_beasiswakhsjrsn',$cekjurusan->id)->delete();
         //baru delete jurusan
-        $deljurusan = Jurusan::where('id', $jurusan->id)->delete();
+        $deljurusan = Jurusan::where('id', $cekjurusan->id)->delete();
         if(!$deljurusan){
             return response()->json("Jurusan gagal didelete");
         }

@@ -70,9 +70,14 @@ class MitraController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Mitra $mitra)
+    public function show($mitra)
     {
-        return new MitraResource($mitra);
+        $cekmitra = Mitra::where('id',$mitra)->first();
+        if(!$cekmitra){
+            return response()->json('ID mitra tidak valid');
+        }
+        
+        return new MitraResource($cekmitra);
     }
 
     /**
@@ -86,18 +91,31 @@ class MitraController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMitraRequest $request, Mitra $mitra)
+    public function update(UpdateMitraRequest $request, $mitra)
     {
-        $mitra->update($request->all());
+        $cekmitra = Mitra::where('id',$mitra)->first();
+        if(!$cekmitra){
+            return response()->json('ID mitra tidak valid');
+        }
+        if($cekmitra->update($request->all())){
+            return $cekmitra;
+        }else{
+            return response()->json('Terjadi kesalahan');
+        };
 
-        return $mitra;
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Mitra $mitra)
+    public function destroy($mitra)
     {
+        //cekmitra
+        $mitra = Mitra::where('id',$mitra)->first();
+        if(!$mitra){
+            return response()->json('ID mitra tidak valid');
+        }
         //hapus mitra artinya hapus beasiswa, hapus beasiswa artinya hapus jurusan beasiswa
         //get dulu id beasiswanya
 
