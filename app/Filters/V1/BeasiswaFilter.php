@@ -13,7 +13,8 @@ class BeasiswaFilter extends ApiFilter{
         'angkatanAwal' => ['gt', 'lt', 'eq','gte','lte'],
         'angkatanAkhir' => ['gt', 'lt','eq', 'gte', 'lte'],
         'semMin'=> ['gt', 'lt','eq'],
-        'semMax'=> ['gt', 'lt','eq']
+        'semMax'=> ['gt', 'lt','eq'],
+        'status'=> ['eq']
     ];
 
     protected $columnMap = [
@@ -23,7 +24,8 @@ class BeasiswaFilter extends ApiFilter{
         'semMin'=> 'sem_min',
         'semMax' => 'sem_max',
         'namaBeasiswa' => 'nama_beasiswa',
-        'idMitra' => 'id_mitra'
+        'idMitra' => 'id_mitra',
+        'status' => 'status'
     ];
 
     protected $operatorMap = [

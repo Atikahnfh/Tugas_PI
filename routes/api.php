@@ -95,6 +95,8 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::delete('mitras/{mitra}', 'MitraController@destroy');
         Route::post('mitras/bulk', ['uses'=> 'MitraController@bulkStore']);
 
+        Route::post('cekelligible', 'CheckelligibleController@cekelligible');
+
 
     });
 });
