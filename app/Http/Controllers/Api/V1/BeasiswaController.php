@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Models\Beasiswa;
 use App\Models\Mitra;
 use App\Models\JurusanBeasiswa;
+use App\Models\StatusBeasiswa;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\StoreBeasiswaRequest;
 use App\Http\Requests\V1\UpdateBeasiswaRequest;
@@ -56,7 +57,7 @@ class BeasiswaController extends Controller
             return response()->json('Tidak ada mitra dengan ID tersebut.');         
         }
         $cekstatus = Statusbeasiswa::where('id_status', '=', $request->status)->first();
-        if(!cekstatus){
+        if(!$cekstatus){
             return response()->json('Status beasiswa tidak valid...');
         }
         //klo berhasilkelaurkan response data yg dimasukkan

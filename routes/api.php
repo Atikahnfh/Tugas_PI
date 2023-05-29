@@ -30,7 +30,17 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function(){
     // Route::apiResource('beasiswas', BeasiswaController::class);
     // Route::post('beasiswas/bulk', ['uses'=> 'BeasiswaController@bulkStore']);
+    Route::get('beasiswas', ['uses' =>'BeasiswaController@index']);
+    Route::get('beasiswas/{beasiswa}', ['uses' =>'BeasiswaController@show']);
+    
+    Route::get('jurusans', 'JurusanController@index');
+    Route::get('jurusans/{jurusan}', ['uses'=>'JurusanController@show']);
 
+    Route::get('jrsnbeasiswas', 'JurusanbeasiswaController@index');
+    Route::get('jrsnbeasiswas/{jurusanbeasiswa}', ['uses'=>'JurusanbeasiswaController@show']);
+
+    Route::get('mitras', 'MitraController@index');
+    Route::get('mitras/{mitra}', ['uses'=>'MitraController@show']);
 
     // Route::apiResource('mitras', MitraController::class);
     // Route::apiResource('jrsnbeasiswas', JurusanbeasiswaController::class);//yang ini routenya pakai "s" yang di controller parameternya sama tapi ga pakai "s"
@@ -59,17 +69,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
 
     //yg perlu pake prefix v1 vvv
     Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function(){
-        Route::get('beasiswas', ['uses' =>'BeasiswaController@index']);
-        Route::get('beasiswas/{beasiswa}', ['uses' =>'BeasiswaController@show']);
         
-        Route::get('jurusans', 'JurusanController@index');
-        Route::get('jurusans/{jurusan}', ['uses'=>'JurusanController@show']);
-    
-        Route::get('jrsnbeasiswas', 'JurusanbeasiswaController@index');
-        Route::get('jrsnbeasiswas/{jurusanbeasiswa}', ['uses'=>'JurusanbeasiswaController@show']);
-    
-        Route::get('mitras', 'MitraController@index');
-        Route::get('mitras/{mitra}', ['uses'=>'MitraController@show']);
 
 
 
@@ -96,6 +96,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::post('mitras/bulk', ['uses'=> 'MitraController@bulkStore']);
 
         Route::post('cekelligible', 'CheckelligibleController@cekelligible');
+        Route::post('cekbeasiswa', 'CheckelligibleController@cekbeasiselligible');
 
 
     });
