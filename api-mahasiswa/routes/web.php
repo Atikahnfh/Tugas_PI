@@ -3,6 +3,7 @@
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SendTokenController;
 
 /*
@@ -15,7 +16,12 @@ use App\Http\Controllers\SendTokenController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', [SendTokenController::class, 'index']);
-Route::post('/submit', [SendTokenController::class, 'viewData']);
-    
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/', [LoginController::class, 'index'])->name('login');
+    Route::post('/', [LoginController::class, 'login']);
+});
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/logout', [LoginController::class, 'logout']);
+    Route::get('/generate-token', [SendTokenController::class, 'index']);
+    Route::post('/generate-token', [SendTokenController::class, 'sendToken']);
+});

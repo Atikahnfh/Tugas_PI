@@ -15,6 +15,7 @@
     </script>
 </head>
 <body class="dark:bg-dark">
+
     <!-- Header Start -->
     <header class="bg-transparent absolute top-0 left-0 w-full flex items-center z-10">
         <div class="container">
@@ -31,20 +32,6 @@
 
                     <nav id="nav-menu" class="hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none dark:bg-dark lg:dark:bg-transparent dark:shadow-slate-800">
                         <ul class="block lg:flex">
-                            <li class="group">
-                                <a href="#contact" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary dark:text-white">Dokumentasi</a>
-                            </li>
-                            <li class="group">
-                                <a href="#contact" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary dark:text-white">Api Token</a>
-                            </li>
-                            <li class="group">
-                                <a href="#contact" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary dark:text-white">
-                                    <form action="{{ '/logout' }}" method="POST" class="inline">
-                                        @csrf
-                                        <button type="submit" class="text-red-500 hover:text-red-700">Logout</button>
-                                    </form>
-                                </a>
-                            </li>
                             <li class="mt-3 flex items-center pl-8 lg:mt-0">
                                 <div class="flex">
                                     <span class="mr-2 text-sm text-slate-500">Light</span>
@@ -64,68 +51,68 @@
         </div>
     </header>
     <!-- Header End -->
-    
-    @if (session('success'))
+
+    {{-- Alert --}}
+    @if (session('error'))
     <div id="myAlert" class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center">
         <div class="bg-white w-1/3 p-6 rounded-xl shadow-xl border border-slate-200">
-            <p class="text-xl font-bold mb-4">✅ Berhasil</p>
-            <p id="alertMessage" class="text-gray-700 mb-10">{{ session('success') }}</p>
+            <p class="text-xl font-bold mb-4">❌ Gagal</p>
+            <p id="alertMessage" class="text-gray-700 mb-10">{{ session('error') }}</p>
             <div class="flex items-center justify-center">
                 <button id="closeAlert" class="bg-primary hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Close</button>
             </div>
         </div>
     </div>
     @endif
+    {{-- End Alert --}}
 
-    <!-- About Section Start -->
+    <!-- Login Section Start -->
     <section id="about" class="pt-36 pb-36 dark:bg-dark">
         <div class="container">
-            <div class="flex flex-wrap">
-                <div class="w-full px-4 mb-10 lg:w-1/2">
-                    <h4 class="font-bold text-bold uppercase text-primary text-lg mb-3">API Token</h4>
-                    <h2 class="font-bold text-dark text-3xl mb-5 max-w-md lg:text-4xl dark:text-white">Generate API Token Mahasiswa!</h2>
-                    <p class="font-medium text-base text-secondary max-w-xl lg:tx-lg">Generate API Token dengan mengisi form yang disediakan agar kamu dapat menggunakan API Mahasiswa.</p>
-                </div>
-                <div class="w-full px-4 lg:w-1/2">
-                    <h3 class="font-semibold text-dark text-2xl mb-4 lg:text-3xl lg:pt-10 dark:text-white">Generate API Token</h3>
-                    <div class="mt-5 sm:max-w-sm">
-                        <form class="space-y-6" action="{{ '/generate-token' }}" method="POST">
+            <div class="flex">
+                <div class="w-full px-4">
+                    <h3 class="font-semibold text-dark text-2xl mb-4 lg:text-3xl lg:pt-10 dark:text-white text-center">Silakan Login</h3>
+                    <div class="mt-5 sm:max-w-sm mx-auto">
+                        <form class="space-y-6" action="{{ '/' }}" method="POST">
                             @csrf
                             <label for="email">
-                                <span class="mt-4 leading-6 block text-sm font-medium mb-2 text-slate-700 after:content-['*'] after:text-pink-500 after:ml-0.5 dark:text-white">Email</span>
-                                <input type="" name="email" id="email" placeholder="Masukkan Email" class="px-3 py-2 border shadow rounded w-full block text-sm placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary dark:shadow-sm dark:shadow-slate-600 @error('email')  ring-pink-700 border-pink-700 @enderror" value="{{ old('email') }}">
-                                @error('email')
-                                <p class="text-sm m-1 text-pink-700">{{ $message }}</p>
-                                @enderror
+                              <span class="mt-4 leading-6 block text-sm font-medium mb-2 text-slate-700 after:content-['*'] after:text-pink-500 after:ml-0.5 dark:text-white">Email</span>
+                              <input type="email" name="email" id="email" placeholder="Masukkan Email" class="px-3 py-2 border shadow rounded w-full block text-sm placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary dark:shadow-sm dark:shadow-slate-600 @error('email')  ring-pink-700 border-pink-700 @enderror" value="{{ old('email') }}">
+                              @error('email')
+                              <p class="text-sm m-1 text-pink-700">{{ $message }}</p>
+                              @enderror
                             </label>
-                            <label for="name">
-                                <span class="mt-4 leading-6 block text-sm font-medium mb-2 text-slate-700 after:content-['*'] after:text-pink-500 after:ml-0.5 dark:text-white">Nama</span>
-                                <input type="text" name="name" id="name" placeholder="Masukkan Nama" class="px-3 py-2 border shadow rounded w-full block text-sm placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary dark:shadow-sm dark:shadow-slate-600 @error('name')  ring-pink-700 border-pink-700 @enderror" value="{{ old('name') }}">
-                                @error('name')
-                                <p class="text-sm m-1 text-pink-700">{{ $message }}</p>
-                                @enderror
+                            <label for="password">
+                              <span class="mt-4 leading-6 block text-sm font-medium mb-2 text-slate-700 after:content-['*'] after:text-pink-500 after:ml-0.5 dark:text-white">Password</span>
+                              <input type="password" name="password" id="password" placeholder="Masukkan Password" class="px-3 py-2 border shadow rounded w-full block text-sm placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary dark:shadow-sm dark:shadow-slate-600 @error('password')  ring-pink-700 border-pink-700 @enderror" value="{{ old('password') }}">
+                              <span class="relative inset-y-0 right-0 flex items-center pr-3">
+                                <svg id="show-password" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 cursor-pointer text-gray-400 hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                                  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                  <path fill-rule="evenodd" d="M10 3a7 7 0 100 14 7 7 0 000-14zm0 12a5 5 0 100-10 5 5 0 000 10z" clip-rule="evenodd" />
+                                </svg>
+                                <svg id="hide-password" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 cursor-pointer text-gray-400 hover:text-gray-500 hidden" viewBox="0 0 20 20" fill="currentColor">
+                                  <path fill-rule="evenodd" d="M9 12a3 3 0 100-6 3 3 0 000 6zM7 9a1 1 0 112 0 1 1 0 01-2 0z" clip-rule="evenodd" />
+                                  <path fill-rule="evenodd" d="M3.27 4.27a.999.999 0 111.42-1.42l12 12a.999.999 0 11-1.42 1.42l-12-12z" clip-rule="evenodd" />
+                                </svg>
+                              </span>
+                              @error('password')
+                              <p class="text-sm m-1 text-pink-700">{{ $message }}</p>
+                              @enderror
                             </label>
-                            <label for="purpose">
-                                <span class="mt-4 leading-6 block text-sm font-medium mb-2 text-slate-700 after:content-['*'] after:text-pink-500 after:ml-0.5 dark:text-white">Untuk</span>
-                                <textarea name="purpose" id="purpose" placeholder="Tujuan saya untuk..." class="px-3 py-2 border shadow rounded w-full block text-sm placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary dark:shadow-sm dark:shadow-slate-600 @error('purpose')  ring-pink-700 border-pink-700 @enderror" value="{{ old('purpose') }}"></textarea>
-                                @error('purpose')
-                                <p class="text-sm m-1 text-pink-700">{{ $message }}</p>
-                                @enderror
-                            </label>
-                    
+                
                             <div>
-                                <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Kirim</button>
+                              <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Login</button>
                             </div>
-                        </form>
+                          </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- About Section End -->
+    <!-- Login Section End -->
 
     <!-- Footer Start -->
-    <footer class="pt-11 pb-12">
+    <footer class="pt-11 pb-12 block">
         <div class="container">
             
             <div class="w-full pt-5 border-t border-secondary">
@@ -162,6 +149,24 @@
     <!-- Footer End -->
     @vite('resources/js/app.js')
     <script>
+        const showPasswordBtn = document.getElementById('show-password');
+        const hidePasswordBtn = document.getElementById('hide-password');
+        const passwordInput = document.getElementById('password');
+      
+        showPasswordBtn.addEventListener('click', () => {
+          showPasswordBtn.classList.add('hidden');
+          hidePasswordBtn.classList.remove('hidden');
+          passwordInput.type = 'text';
+        });
+      
+        hidePasswordBtn.addEventListener('click', () => {
+          hidePasswordBtn.classList.add('hidden');
+          showPasswordBtn.classList.remove('hidden');
+          passwordInput.type = 'password';
+        });
+
+    </script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const closeBtn = document.getElementById('closeAlert');
             const alert = document.getElementById('myAlert');
@@ -174,6 +179,6 @@
                 hideAlert();
             });
         });
-    </script>    
+    </script>
 </body>
 </html>
