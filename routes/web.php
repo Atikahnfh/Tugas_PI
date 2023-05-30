@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,5 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/generate-token', function () {
-    return view('generate-token');
+    return view('generatetoken');
+});
+
+Route::post('gettoken', [AuthController::class, 'registoken']);
+Route::get('/generate-token-berhasil', function () {
+    return view('generatetokenberhasil');
 });
