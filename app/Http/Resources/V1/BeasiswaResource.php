@@ -37,6 +37,8 @@ class BeasiswaResource extends JsonResource
             'semMax'=>$this->sem_max,
             'status'=>$statusreplacement,
             'namaMitra' => $mitranama->nama_mitra,
+            'linkDaftar' => $this->link_daftar,
+            'image' => $this->image,
 
             'jurusanbeasiswas' => JurusanBeasiswaResource::collection($this->whenLoaded('jurusanbeasiswas')),
             'mitras' => MitraResource::collection($this->whenLoaded('mitras')),
