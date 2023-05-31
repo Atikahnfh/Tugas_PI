@@ -102,7 +102,7 @@ class JurusanbeasiswaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($jurusanbeasiswa)////yang ini ga pakai "s" di akhir parameternya tpi yang di controller  sama tapi pakai "s"
+    public function show($jurusanbeasiswa)
     {
         //cek valid
         $cekjurusanbeasiswa = Jurusanbeasiswa::where('id','=',$jurusanbeasiswa)->first();

@@ -72,12 +72,21 @@ class MitraController extends Controller
      */
     public function show($mitra)
     {
-        $cekmitra = Mitra::where('id',$mitra)->first();
-        if(!$cekmitra){
+        
+        $cekmitra = Mitra::where('id',$mitra);
+        
+        if(!$cekmitra->first()){
             return response()->json('ID mitra tidak valid');
         }
         
-        return new MitraResource($cekmitra);
+
+        $includebeasiswas = request()->query('includeBeasiswas');       
+        
+        if($includebeasiswas){
+            $cekmitra = $cekmitra->with('beasiswas');
+        }
+
+        return new MitraResource($cekmitra->first());
     }
 
     /**

@@ -14,7 +14,7 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('generatetoken');
 });
 Route::get('/generate-token', function () {
     return view('generatetoken');
