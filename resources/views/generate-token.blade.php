@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>API Mahasiswa</title>
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark')
@@ -54,11 +54,12 @@
     </header>
     <!-- Header End -->
     
-    @if (session('success'))
+    @if (isset($tokenget))
     <div id="myAlert" class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center">
         <div class="bg-white w-1/3 p-6 rounded-xl shadow-xl border border-slate-200">
             <p class="text-xl font-bold mb-4">✅ Berhasil</p>
-            <p id="alertMessage" class="text-gray-700 mb-10">{{ session('success') }}</p>
+            <p id="alertMessage" class="text-gray-700">Token berhasil di-generate. Token kamu adalah:</p>
+            <p id="alertMessage" class="text-gray-700 mb-10">{{ $tokenget }}</p>
             <div class="flex items-center justify-center">
                 <button id="closeAlert" class="bg-primary hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Close</button>
             </div>
@@ -78,7 +79,7 @@
                 <div class="w-full px-4 lg:w-1/2">
                     <h3 class="font-semibold text-dark text-2xl mb-4 lg:text-3xl lg:pt-10 dark:text-white">Generate API Token</h3>
                     <div class="mt-5 sm:max-w-sm">
-                        <form class="space-y-6" action="{{ '/generate-token' }}" method="POST">
+                        <form class="space-y-6" action="{{ '/' }}" method="POST">
                             @csrf
                             <label for="email">
                                 <span class="mt-4 leading-6 block text-sm font-medium mb-2 text-slate-700 after:content-['*'] after:text-pink-500 after:ml-0.5 dark:text-white">Email</span>
@@ -149,7 +150,6 @@
         </div>
     </footer>
     <!-- Footer End -->
-    @vite('resources/js/app.js')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const closeBtn = document.getElementById('closeAlert');

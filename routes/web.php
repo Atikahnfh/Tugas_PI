@@ -14,13 +14,6 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::get('/', function () {
-    return view('generatetoken');
+    return view('generate-token');
 });
-Route::get('/generate-token', function () {
-    return view('generatetoken');
-});
-
-Route::post('gettoken', [AuthController::class, 'registoken']);
-Route::get('/generate-token-berhasil', function () {
-    return view('generatetokenberhasil');
-});
+Route::post('/', [AuthController::class, 'registoken']);

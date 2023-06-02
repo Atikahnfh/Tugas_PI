@@ -21,27 +21,30 @@ class AuthController extends Controller
     use HttpResponses;
     
     public function registoken(Request $request){
+        $validator = $request->validate([
+            'email' => 'required|email:dns|unique:users',
+            'name' => 'required|min:3|max:100',
+            'purpose' => 'required|min:8'
+        ]);
+
         //masukkan ke table user
         $makeuser = User::create([
-            'name' => $request->nama,
+            'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make("1")
         ]);
+
         if(!$makeuser){
             return "User gagal dibuat. Token gagal dibuat.";
         }
         //buat token
-        $gettoken = $makeuser->createToken($request->tujuan, ['none'])->plainTextToken;
-        //buat di table tujuan
-        // return $this->success([
-        //     'user' => $makeuser,
-        //     'token' => $gettoken
-        // ]);
+        $gettoken = $makeuser->createToken($request->purpose, ['none'])->plainTextToken;
+
         $data = array(
-            'tokenget' => $gettoken
+            'tokenget' => $gettoken,
         );
 
-        return view('generatetokenberhasil')->with($data);
+        return view('generate-token')->with($data);
     }
     
     
