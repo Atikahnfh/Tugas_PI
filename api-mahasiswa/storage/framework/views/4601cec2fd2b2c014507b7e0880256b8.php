@@ -32,19 +32,12 @@
                     <nav id="nav-menu" class="hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none dark:bg-dark lg:dark:bg-transparent dark:shadow-slate-800">
                         <ul class="block lg:flex">
                             <li class="group">
-                                <a href="#contact" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary dark:text-white">Dokumentasi</a>
+                                <a href="#dokumentasi" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary dark:text-white">Dokumentasi</a>
                             </li>
                             <li class="group">
-                                <a href="#contact" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary dark:text-white">Api Token</a>
+                                <a href="/logout" class="text-base py-2 mx-8 flex text-red-500 hover:text-red-700 dark:text-white">Logout</a>
                             </li>
-                            <li class="group">
-                                <a href="#contact" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary dark:text-white">
-                                    <form action="<?php echo e('/logout'); ?>" method="POST" class="inline">
-                                        <?php echo csrf_field(); ?>
-                                        <button type="submit" class="text-red-500 hover:text-red-700">Logout</button>
-                                    </form>
-                                </a>
-                            </li>
+                            
                             <li class="mt-3 flex items-center pl-8 lg:mt-0">
                                 <div class="flex">
                                     <span class="mr-2 text-sm text-slate-500">Light</span>

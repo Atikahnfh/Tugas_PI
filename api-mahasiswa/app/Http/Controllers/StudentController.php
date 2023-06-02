@@ -19,7 +19,7 @@ class StudentController extends Controller
     {
         return StudentResource::collection(
                 Student::all()
-            );
+        );
     }
 
     /**
@@ -36,9 +36,9 @@ class StudentController extends Controller
     public function show(Student $student, $nim)
     {
         $student  = Student::where('nim', '=', $nim)->first();
-        // $academic =  Academic::where('id', '=', $student->id)->first();
 
-        return $this->isNotExisted($nim) ? $this->isNotExisted($nim) : new StudentResource($student);
+        return $this->isNotExisted($nim) ? $this
+        ->isNotExisted($nim) : new StudentResource($student);
     }
 
     /**

@@ -54,3 +54,34 @@ if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.match
 } else {
     darkToggle.checked = false;
   }
+
+// Button show password
+const showPasswordBtn = document.getElementById('show-password');
+        const hidePasswordBtn = document.getElementById('hide-password');
+        const passwordInput = document.getElementById('password');
+      
+        showPasswordBtn.addEventListener('click', () => {
+          showPasswordBtn.classList.add('hidden');
+          hidePasswordBtn.classList.remove('hidden');
+          passwordInput.type = 'text';
+        });
+      
+        hidePasswordBtn.addEventListener('click', () => {
+          hidePasswordBtn.classList.add('hidden');
+          showPasswordBtn.classList.remove('hidden');
+          passwordInput.type = 'password';
+        });
+
+// Alert
+document.addEventListener('DOMContentLoaded', function() {
+    const closeBtn = document.getElementById('closeAlert');
+    const alert = document.getElementById('myAlert');
+    
+    function hideAlert() {
+        alert.style.display = 'none';
+    }
+
+    closeBtn.addEventListener('click', function() {
+        hideAlert();
+    });
+});

@@ -21,7 +21,10 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/', [LoginController::class, 'login']);
 });
 Route::group(['middleware' => 'auth'], function () {
-    Route::post('/logout', [LoginController::class, 'logout']);
+    Route::get('/logout', [LoginController::class, 'logout']);
+    Route::get('/dokumentasi', function () {
+        return view('dokumentasi');
+    });
     Route::get('/generate-token', [SendTokenController::class, 'index']);
     Route::post('/generate-token', [SendTokenController::class, 'sendToken']);
 });
