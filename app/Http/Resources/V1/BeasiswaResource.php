@@ -36,6 +36,7 @@ class BeasiswaResource extends JsonResource
             'semMin'=> $this->sem_min,
             'semMax'=>$this->sem_max,
             'status'=>$statusreplacement,
+            'ipkMin'=> $this->ipk_min,
             'namaMitra' => $mitranama->nama_mitra,
             'linkDaftar' => $this->link_daftar,
             'image' => $this->image,

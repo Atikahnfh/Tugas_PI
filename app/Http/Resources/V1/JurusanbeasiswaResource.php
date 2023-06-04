@@ -34,7 +34,6 @@ class JurusanbeasiswaResource extends JsonResource
             'idJrsnBeasiwa' => $idreplacement,
             'idBeasiswa' => $this->beasiswa_id,
             'idKhsJurusan' => $this->id_beasiswakhsjrsn,
-            'ipkMin' => $this->ipk_min,
             'namaBeasiswa' => $getnama->nama_beasiswa,
             'namaJurusan' => $getnama->nama_jurusan
         ];
