@@ -20,7 +20,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // $request->session()->regenerate();
-            return redirect('generate-token')->with('success', 'Login Berhasil');
+            return redirect('/generate-token')->with('success', 'Login Berhasil');
         } else {
             return redirect()->back()->with('error', 'Email atau password salah');
         }

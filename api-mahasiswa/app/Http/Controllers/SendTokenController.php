@@ -45,7 +45,7 @@ class SendTokenController extends Controller
 
         Mail::to($user->email)->send(new SendToken($data));
 
-        return redirect('generate-token')->with('success', 'Token berhasil dikirim ke email '.$user->email);
+        return redirect('/generate-token')->with('success', 'Token berhasil dikirim ke email '.$user->email);
         
     }
 }
