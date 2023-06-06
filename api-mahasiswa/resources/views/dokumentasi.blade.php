@@ -44,16 +44,16 @@
                         <h2 class="font-bold text-dark text-3xl mb-5 max-w-md lg:text-3xl dark:text-white">Dokumentasi API Mahasiswa</h2>
                         <div class="mt-8">
                             <h4 class="font-bold text-bold text-primary text-lg mb-3">👋🏻Introduction</h4>
-                            <p class="font-medium text-base text-secondary max-w-3xl lg:tx-lg">Selamat datang di API Mahasiswa. API Mahasiswa ini dibangun menggunakan Framework Laravel v10.x dan TailwindCSS v3.3.2</p>
+                            <p class="text-base text-secondary max-w-3xl lg:tx-lg">Selamat datang di API Mahasiswa. API Mahasiswa ini dibangun menggunakan Framework Laravel v10.x dan TailwindCSS v3.3.2</p>
 
                             <h4 class="font-bold text-bold text-primary text-lg mt-4 mb-3">🚀Getting started with API Mahasiswa</h4>
-                            <p class="font-medium text-base text-secondary max-w-3xl lg:tx-lg">Koleksi ini berisi dokumentasi menyeluruh dari API Mahasiswa. Mereka akan membantu Anda memahami kemampuan layanan yang kami miliki dan cara menggunakannya secara efektif.</p>
+                            <p class="text-base text-secondary max-w-3xl lg:tx-lg">Koleksi ini berisi dokumentasi menyeluruh dari API Mahasiswa. Mereka akan membantu Anda memahami kemampuan layanan yang kami miliki dan cara menggunakannya secara efektif.</p>
                         </div>
                     </div>
                     
                     <div class="mt-3 mb-5">
                         <h3 class="font-semibold text-dark text-xl mb-3 lg:text-2xl lg:pt-10 dark:text-white">Generete Token</h3>
-                        <p class="font-medium text-base text-secondary max-w-3xl lg:tx-lg">Klik API Token pada navbar menu untuk men-generate API Token Mahasiswa. Kemudian token akan dikirimkan ke email yang ada masukkan pada field email</p>
+                        <p class="text-base text-secondary max-w-3xl lg:tx-lg">Klik API Token pada navbar menu untuk men-generate API Token Mahasiswa. Kemudian token akan dikirimkan ke email yang ada masukkan pada field email</p>
                         <div class="mt-3 sm:max-w-sm">
                             <label for="email">
                                 <span class="mt-4 leading-6 block text-[12px] font-medium mb-2 text-slate-700 dark:text-white">Email</span>
@@ -64,7 +64,7 @@
 
                     <div id="semua-mahasiswa" class="mt-3 mb-3">
                         <h3 class="font-semibold text-dark text-xl mb-3 lg:text-2xl lg:pt-10 dark:text-white"><span class="uppercase text-green-500">Get</span> Semua Mahasiswa</h3>
-                        <p class="font-medium text-base text-secondary max-w-3xl lg:tx-lg">Request method ini berfungsi untuk mengambil seluruh data mahasiswa dari database</p>
+                        <p class="text-base text-secondary max-w-3xl lg:tx-lg">Request method ini berfungsi untuk mengambil seluruh data mahasiswa dari database</p>
                         <div class="mt-5">
                             <code class="bg-slate-50 px-4 py-2 shadow rounded-md break-all text-sm">http://localhost:8000/api/mahasiswa</code>
 
@@ -98,7 +98,7 @@
 
                     <div id="satu-mahasiswa" class="mt-3 mb-3">
                         <h3 class="font-semibold text-dark text-xl mb-3 lg:text-2xl lg:pt-10 dark:text-white"><span class="uppercase text-green-500">Get</span> Satu Mahasiswa</h3>
-                        <p class="font-medium text-base text-secondary max-w-3xl lg:tx-lg">Request method ini untuk mengambil satu data mahasiswa dari database berdasarkan nim yang diikutsertakan pada url</p>
+                        <p class="text-base text-secondary max-w-3xl lg:tx-lg">Request method ini untuk mengambil satu data mahasiswa dari database berdasarkan nim yang diikutsertakan pada url</p>
                         <div class="mt-5">
                             <code class="bg-slate-50 px-4 py-2 shadow rounded-md break-all text-sm">http://localhost:8000/api/mahasiswa/{nim}</code>
 
